@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>My Example</title>
+<body style="background-color:DarkCyan ;">
+<!-- CSS -->
+<style>
+.myForm {
+font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 0.8em;
+width: 50em;
+padding: 1em;
+margin: auto;
+
+}
+
+h1 { 
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  text-align: justify;
+}
+
+.myForm * {
+box-sizing: border-box;
+}
+
+.myForm label {
+padding: 0;
+font-weight: bold;
+text-align: justify;
+display: block;
+clear: left;
+}
+
+
+.myForm select{
+margin-left: 2em;
+display: block;
+width: 20em;
+border: 1px solid #ccc;
+font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+font-size: 0.9em;
+font-weight: bold;
+padding: 0.3em;
+}
+
+.myForm input[type='radio']{
+ display: inline-block;  
+    margin-left: 9px;
+    margin-top: -1.2em;    
+    vertical-align: 0em; 
+padding: 10px;
+ /* add me */
+}
+
+.myForm button {
+padding: 1em;
+border-radius: 0.5em;
+background: #eee;
+border: none;
+font-weight: bold;
+margin-left: 14em;
+margin-top: 1.8em;
+
+}
+
+.myForm button:hover {
+background: #ccc;
+cursor: pointer;
+
+}
+</style>
+
+</head>
+<body>
+
+<form class="myForm" method="get" enctype="application/x-www-form-urlencoded" action="/html/codes/html_form_handler.cfm">
+<header>
+<h1>Radio Bulletin</h1>
+<span>A channel which tells you the important news from all across the world</span>
+<h4>*General&emsp;*Technology&emsp;*Entertainment&emsp;*Business&emsp;*Sports&emsp;*Health&emsp;*Science</h4>
+</header>
+
+<p>
+<label>Please select the country 
+<select id="country" name="country" required>
+<option value="" selected="selected">Select One</option>
+<option value="ar">Argentina</option>
+<option value="au">Australia</option>
+<option value="be">Belgium</option>
+<option value="br">Brazil</option>
+<option value="ca">Canada</option>
+<option value="ch">China</option>
+<option value="co">Colombia</option>
+<option value="cu">Cuba</option>
+<option value="cz">Czech Republic</option>
+<option value="eg">Egypt</option>
+<option value="fr">France</option>
+<option value="gr">Greece</option>
+<option value="hk">Hong Kong</option>
+<option value="id">Indonesia</option>
+<option value="ir">Ireland</option>
+<option value="il">Israel</option>
+<option value="in">India</option>
+<option value="it">Italy</option>
+<option value="jp">Japan</option>
+<option value="kr">South Korea</option>
+<option value="mx">Mexico</option>
+<option value="my">Malaysia</option>
+<option value="nl">Netherlands</option>
+<option value="no">Norway</option>
+<option value="nz">New Zealand</option>
+<option value="ph">Philippines</option>
+<option value="pl">Poland</option>
+<option value="pt">Portugal</option>
+<option value="ro">Romania</option>
+<option value="ru">Russia</option>
+<option value="sa">Saudi Arabia</option>
+<option value="se">Sweden</option>
+<option value="sg">Singapore</option>
+<option value="th">Thailand</option>
+<option value="us">United States Of America</option>
+<option value="ve">Venezuela</option>
+</select>
+</label> 
+</p>
+
+<p>
+<label>Please select the category
+<select id="category" name="category" required>
+<option value="" selected="selected">Select One</option>
+<option value="general">General</option>
+<option value="technology">Technology</option>
+<option value="entertainment">Entertainment</option>
+<option value="business">Business</option>
+<option value="sports">Sports</option>
+<option value="health">Health</option>
+<option value="science">Science</option>
+<option value="science">All</option>
+</select>
+</label>
+</p>
+
+<p>
+<label>Preferable Gender for News Reading<br><br>
+<input type="radio"  name="gender" value="female" id="genderF" checked> Female<br><br></input>
+<input type="radio"  name="gender" value="male" id="genderM"> Male</input>		
+</label>
+</p>
+
+<p><button type="submit" value="Submit" id="SubmitButton">SUBMIT</button></p>
+</form>
+
+<script>
+
+	document.getElementById("SubmitButton").onclick = function(){
+        var Cn=document.getElementById("country");
+	var Country = Cn.options[Cn.selectedIndex].value;
+	var Cg=document.getElementById("category");
+	var Category = Cg.options[Cg.selectedIndex].value;
+	if (document.getElementById("genderF").checked){
+	var Gender=document.getElementById("genderF").value;
+	
+	}else{
+	
+	var Gender=document.getElementById("genderM").value;
+	
+	}
+	//Constructing a json string
+	var OutputString = "{\"Country:\"\"" + Country + "\","  +  "\"Category:\"\"" + Category + "\"," + "\"Gender:\"\"" + Gender + "\"}";
+	//Once the command has been called a string can be passed back to UiPath and the form will close
+	window.external.setResult(OutputString);
+	};
+
+</script>
+
+
+</body>
+</html>
